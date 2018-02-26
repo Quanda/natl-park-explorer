@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, Arial, sans-serif;
+}
+
+body {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+html {
+    background: url('images/half-dome.JPG') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.heading {
+    margin: 10px 0px 30px 0px;
+}
+
+.wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 45em;
+    width: 90%;
+}
+
+.park {
+    width: 80%;
+    margin: auto;
+    
+}
+
+.park h2 {
+    margin-bottom: 15px;
+}
+
+.advanced-search {
+    display: block;
+    margin: 10px 20px 20px 0px;
+    cursor: pointer;
+}
+
+.keyword-search-input {
+    background-color: transparent;
+    -webkit-appearance: none;
+    border: none;
+    display: block;
+    width: 100%;
+    padding: 12px 55px 15px 15px;
+    font-size: 22px;
+}
+.keyword-search-input::placeholder {
+    color:black;
+}
+
+
+.input-label {
+    position: relative;
+    display: block;
+    max-width: 400px;
+    min-width: 250px;
+    min-height: 58px;
+    margin: 0 auto 20px auto;
+    background: transparent;
+    z-index: 10;
+    border: 1px solid black;
+    text-align-last: center;
+    outline: none;
+    color: white;
+}
+
+select {
+    min-width: 250px;
+    text-align-last: center;
+    border: 1px solid white;
+    outline: none;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    padding: 12px 55px 15px 15px;
+    font-size: 22px;
+    color: black;
+    cursor: pointer;
+}
+
+.select-label::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    line-height: 50px;
+    content: '\2228';
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    border-left: 1px solid #3C1C78;
+    z-index: -1;
+}
+
+
+
