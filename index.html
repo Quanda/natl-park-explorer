@@ -20,24 +20,22 @@
 
     <main role="main" class="wrapper">
         
-        <!-- SEARCHALL -->
-        <form class="landing-elem searchall-form">
-            <label for="searchall-input" class="input-label select-label">
-                <select class="searchall-input"></select>
+        <!-- SEARCH ALL -->
+        <form class="search-form landing-elem park-search-form">
+            <label for="park-search-input" class="input-label select-label">
+                <select class="park-search-input"></select>
             </label>
         </form>
-        
-        <a class="landing-elem advanced-search">Advanced Search</a>
 
         <!-- KEYWORD SEARCH -->
-        <form class="advanced-search-elem keyword-search-form">
+        <form class="search-form keyword-search-form">
             <label for="keyword-search-input" class="input-label">
                 <input type="text" class="keyword-search-input" placeholder="Search by Keyword">
             </label>
         </form>
         
         <!-- STATE SEARCH -->
-        <form class="advanced-search-elem state-search-form">
+        <form class="search-form state-search-form">
             <label for="state-search-input" class="input-label select-label">
                 <select class="state-search-input">
                     <option>Select a State</option>
@@ -95,7 +93,17 @@
                 </select>
             </label>
         </form>
-
+        
+        <!-- SEARCH TYPE -->
+        <form class="landing-elem search-type-form">
+            <h2>Search Type</h2>
+            <input type="radio" name="rb" id="rb1" value="park" checked/>
+            <label for="rb1" class="radio-label">Park</label>
+            <input type="radio" name="rb" id="rb2" value="state" />
+            <label for="rb2" class="radio-label">State</label>
+            <input type="radio" name="rb" id="rb3" value="keyword"/>
+            <label for="rb3" class="radio-label">Keyword</label>
+        </form>
         
         <section class="park-container">
         </section>

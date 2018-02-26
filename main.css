@@ -39,6 +39,55 @@ html {
     margin-bottom: 15px;
 }
 
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.radio-label {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 10px;
+  line-height: 36px;
+  cursor: pointer;
+}
+.radio-label::before {
+  content: " ";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid black;
+  border-radius: 4px;
+  z-index: -1; 
+}
+input[type="radio"]:checked + radio-label {
+  padding-left: 10px;
+  color: #fff;
+}
+
+input[type="radio"] + .radio-label::before {
+  border-radius: 18px;
+}
+
+input[type="radio"]:checked + .radio-label::before {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+.radio-label,
+.radio-label::before {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
 .advanced-search {
     display: block;
     margin: 10px 20px 20px 0px;
@@ -60,13 +109,13 @@ html {
 
 
 .input-label {
+    background-color: white;
     position: relative;
     display: block;
     max-width: 400px;
     min-width: 250px;
     min-height: 58px;
     margin: 0 auto 20px auto;
-    background: transparent;
     z-index: 10;
     border: 1px solid black;
     text-align-last: center;

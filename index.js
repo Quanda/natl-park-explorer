@@ -15,7 +15,7 @@ $(document).ready(function() {
     let matchingNationalParks, matchingNationalParkNames;
 
     // initialize the dropdown input
-    let dropdownSelector = $('.searchall-input');
+    let dropdownSelector = $('.park-search-input');
     dropdownSelector.empty(); // remove old options
     dropdownSelector.append($("<option></option>").text('Find a Park'));
     
@@ -47,16 +47,48 @@ $(document).ready(function() {
         }
     })
     
+    // handle user selecting search type
+    $('.search-type-form input').change(function(event) {
+        let searchType = $(event.target).val();
+        console.log(searchType)
+        let selectedSearchForm = $(`.${searchType}-search-form`)
+        console.log(selectedSearchForm)
+
+        $('.search-form').not(selectedSearchForm).hide();
+        $(selectedSearchForm).show()
+        
+    });
+    
     // handle user selecting park from searchall dropdown
-    $('.searchall-input').change(function() {
+    $('.park-search-input').change(function() {
         // the selected park from dropdown
-        const selectedPark = $('.searchall-input').find(":selected").text();
+        const selectedPark = $('.park-search-input').find(":selected").text();
         
         // find matching park object from api
         let matchingNationalPark = matchingNationalParks.find( (park) => park.fullName == selectedPark)
         
         // render the park view
         renderParkView(matchingNationalPark)
+    })
+    
+    // handle search by keyword
+    $('.keyword-search-form').on('submit', function(event){
+        event.preventDefault();
+
+        const SEARCH_STRING = $('.keyword-search-input').val();
+       
+        console.log(`Searching by keyword: ${SEARCH_STRING}`);
+
+        getNPSData(NPS_URL, NPS_API_KEY, null, SEARCH_STRING, handleAPIResponse);
+    })
+    
+    // handle search by state
+    $('.state-search-input').change(function() {
+        const STATE_CODE = $('.state-search-input').val();
+
+        console.log(`Searching by state code: ${STATE_CODE}`);
+
+        getNPSData(NPS_URL, NPS_API_KEY, STATE_CODE, null, handleAPIResponse);
     })
     
     // autocomplete national park search
@@ -125,27 +157,6 @@ $(document).ready(function() {
             $('.advanced-search-elem').toggle();
         })
     }
-    // search by keyword
-    $('.keyword-search-form').on('submit', function(event){
-        event.preventDefault();
-
-        const SEARCH_STRING = $('.keyword-search-input').val();
-       
-        console.log(`Searching by keyword: ${SEARCH_STRING}`);
-
-        getNPSData(NPS_URL, NPS_API_KEY, null, SEARCH_STRING, handleAPIResponse);
-    })
-    
-    // search by state code
-    $('.state-search-form').on('submit', function(event){
-        event.preventDefault();
-
-        const STATE_CODE = $('.state-search-input').val();
-
-        console.log(`Searching by state code: ${STATE_CODE}`);
-
-        getNPSData(NPS_URL, NPS_API_KEY, STATE_CODE, null, handleAPIResponse);
-    })
 
     // gets NPS data
     function getNPSData(url, API_KEY, STATE_CODE, SEARCH_STRING, callback) {
