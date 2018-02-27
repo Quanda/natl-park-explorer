@@ -10,18 +10,25 @@
     <link type="text/css" rel="stylesheet" href="main.css">
     <link type="text/css" rel="stylesheet" href="grid.css">
     <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
     <title>National Parks Explorer</title>
 </head>
 <body>
 
-    <header role="banner">        
-        <h1 class="heading">National Park Explorer</h1>
+    <header role="banner"> 
+        <div class="h1-background">
+            <h1>National Parks Explorer</h1>
+        </div>
+        <ul>
+            <a href="#" class="find-a-park-link"><li>FIND A PARK</li></a>
+            <a href="#" class="gallery-link"><li>GALLERY</li></a>
+        </ul>
     </header>
 
     <main role="main" class="wrapper">
         
         <!-- SEARCH ALL -->
-        <form class="search-form landing-elem park-search-form">
+        <form class="search-form park-search-form">
             <label for="park-search-input" class="input-label select-label">
                 <select class="park-search-input"></select>
             </label>
@@ -95,8 +102,8 @@
         </form>
         
         <!-- SEARCH TYPE -->
-        <form class="landing-elem search-type-form">
-            <h2>Search Type</h2>
+        <form class="search-type-form">
+            <h4>Search Type</h4>
             <input type="radio" name="rb" id="rb1" value="park" checked/>
             <label for="rb1" class="radio-label">Park</label>
             <input type="radio" name="rb" id="rb2" value="state" />
@@ -104,6 +111,14 @@
             <input type="radio" name="rb" id="rb3" value="keyword"/>
             <label for="rb3" class="radio-label">Keyword</label>
         </form>
+       
+        <section class="landing-elem site-description">
+            <p>add text that explains what the app is for and how to use it. It's consistently clear what actions the user should take.  reference nps api</p>
+        </section>  
+        
+        <blockquote class="landing-elem landing-quote" cite="https://www.nps.gov/parkhistory/hisnps/NPSThinking/famousquotes.htm">
+            “There is nothing so American as our national parks.... The fundamental idea behind the parks is that the country belongs to the people . . . for the enrichment of the lives of all of us.” <br><i> -President Franklin D. Roosevelt, 1936</i>
+        </blockquote>
         
         <section class="park-container">
         </section>

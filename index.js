@@ -1,37 +1,45 @@
 /*
-
+    compartmentalize JS into appropriate files
 */
+
 $(document).ready(function() {
     'use strict';
-      
+    
+    // invoke functions
+    returnHome() // removes wrapper child elements when home button (h1) clicked
+    displayLandingElemsOnly(); // hides all elements except landing elements
+    parkBackout(); // handles click of 'Back' button in Park view
+    
     // Google Maps API
     const PLACE_DETAILS_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch';
     
-    // National Parks Service API
-    // https://www.nps.gov/subjects/developer/api-documentation.htm#/places/getPlaces
+    // National Parks Service API (https://www.nps.gov/subjects/developer/api-documentation.htm#/places/getPlaces)
     const NPS_URL = 'https://developer.nps.gov/api/v1/parks';
     const NPS_API_KEY = 'lapmufG7NV0EN0DFxTZDvcVTVVfQQggLWURvaqdY'
     
-    let matchingNationalParks, matchingNationalParkNames;
+    // initialize variables
+    let NPS_DATA, matchingNationalParks, matchingNationalParkNames;
 
-    // initialize the dropdown input
-    let dropdownSelector = $('.park-search-input');
-    dropdownSelector.empty(); // remove old options
-    dropdownSelector.append($("<option></option>").text('Find a Park'));
+    // prepare the dropdown input
+    let parkSearchSelector = $('.park-search-input');
+    parkSearchSelector.empty(); // remove old options
+    parkSearchSelector.append($("<option></option>").text('Find a Park').val(-1));
     
-    // load all national parks (for searchall)
+    // MAKE AJAX CALL TO LOAD NATIONAL PARK DATA
+    // INITIALIZE THE KEYWORD SEARCH AUTOCOMPLETE WITH THIS DATA
     $.ajax( {
         url: NPS_URL,
         dataType: 'json', 
         data: {
             api_key: NPS_API_KEY,
-            limit: 1000,
-            sort: '!name'
+            limit: 1000
         },
         success: function(nps_response) {
-            console.log(nps_response)
+            NPS_DATA = nps_response;
+            console.log('nps_data...')
+            console.log(NPS_DATA)
             // filter response by national parks and where the name matches the user input (request.term)
-            matchingNationalParks = nps_response.data.filter((item) => item.designation.match('Park'));
+            matchingNationalParks = NPS_DATA.data.filter((item) => item.designation.match('Park'));
             
             // sort the national parks alphabetically
             matchingNationalParks.sort(function(a, b){
@@ -42,31 +50,49 @@ $(document).ready(function() {
                 
             // add each national park as a select option
             $.each(matchingNationalParks, function(value, key) {
-                dropdownSelector.append($("<option></option>").attr("value", value).text(key.fullName));
+                parkSearchSelector.append($("<option></option>").attr("value", value).text(key.fullName));
             });
+            
+            handleKeywordAutoComplete(); // 
         }
+    })
+
+/* NATIONAL PARK SERVICE SEARCH */
+    /* NAVIGATION LINKS */
+    // find a park
+    $('.find-a-park-link').on('click', function() {
+        resetParkSearch('park')
+    })
+    // inspiration
+    $('.inspiration-link').on('click', function() {
+        console.log('clicked inspiration link');
+    })
+    // gallery
+    $('.gallery-link').on('click', function() {
+        console.log('clicked gallery link');
     })
     
     // handle user selecting search type
     $('.search-type-form input').change(function(event) {
         let searchType = $(event.target).val();
-        console.log(searchType)
-        let selectedSearchForm = $(`.${searchType}-search-form`)
-        console.log(selectedSearchForm)
+        let selectedSearchForm = $(`.${searchType}-search-form`);
+        
+        // uncheck radios then check only the one that was selected
+        $(`.search-type-form input`).prop( "checked", false );
+        $(`.search-type-form input[value=${searchType}]`).prop( "checked", true );
 
         $('.search-form').not(selectedSearchForm).hide();
-        $(selectedSearchForm).show()
-        
+        $(selectedSearchForm).show()   
     });
     
-    // handle user selecting park from searchall dropdown
+    // handle user selecting park from find a park dropdown
     $('.park-search-input').change(function() {
         // the selected park from dropdown
-        const selectedPark = $('.park-search-input').find(":selected").text();
+        let selectedPark = $('.park-search-input').find(":selected").text();
         
         // find matching park object from api
         let matchingNationalPark = matchingNationalParks.find( (park) => park.fullName == selectedPark)
-        
+
         // render the park view
         renderParkView(matchingNationalPark)
     })
@@ -91,49 +117,39 @@ $(document).ready(function() {
         getNPSData(NPS_URL, NPS_API_KEY, STATE_CODE, null, handleAPIResponse);
     })
     
-    // autocomplete national park search
-    $('.keyword-search-input').autocomplete({
-        source: function(request, response) {
-            $.ajax( {
-                url: NPS_URL,
-                dataType: 'json', 
-                data: {
-                    q: request.term,
-                    api_key: NPS_API_KEY,
-                    limit: 1000,
-                    sort: '!name'
-                },
-                success: function(nps_response) {
-                    // filter response by national parks and where the name matches the user input (request.term)
-                    matchingNationalParks = nps_response.data.filter((item) => item.designation.match('National Park') && item.name.match(new RegExp(request.term, 'i')))
-                    
-                    // list of national park names
-                    matchingNationalParkNames = matchingNationalParks.map( (park) => park.name)
-                    
-                    response(matchingNationalParkNames);
-                }
-            })
-        },
-        minLength: 3,
-        select: function( event, ui ) {
-            // get data for matching park
-            let matchingNationalPark = matchingNationalParks.find((park) => park.name == ui.item.value)
-            console.log(matchingNationalPark)
-            // render information for park
-            renderParkView(matchingNationalPark)
-            
-        },
-    } );
-
+    // returns array of national park names
+    function returnNationalParkNames(parks) {
+        // list of national park names
+        console.log(parks)
+        return parks.map( (park) => park.fullName)
+    }
+    
+    // autocomplete the keyword search input
+    function handleKeywordAutoComplete() {
+        $('.keyword-search-input').autocomplete({
+            source: returnNationalParkNames(matchingNationalParks),
+            minLength: 3,
+            select: function( event, ui ) {
+                // get data for matching park
+                let matchingNationalPark = matchingNationalParks.find((park) => park.fullName == ui.item.value)
+                
+                // render information for park
+                renderParkView(matchingNationalPark)
+            }
+        })
+    }
+    
     // render the view for a single park
     function renderParkView(park) {
         $('.wrapper').children().not('.park-container').hide()
         let parkHtml = `<div class="park">
+            <a class="park-backout" href="#">Back</a>
             <h2>${park.fullName}</h2>
             <p>${park.description}</p><br>
-            <p>Location: ${park.states}</p><br>
+            <p>Location: <a href="https://www.google.com/maps/place/${park.fullName}" target="_blank">${park.states}</a></p><br>
             <a href="${park.url}" target="_blank">Website</a>
-            <a href="${park.directionsUrl}" target="_blank">Directions</a><br><br>
+            <a href="${park.directionsUrl}" target="_blank">Directions</a>
+            <a href="https://www.nps.gov/${park.parkCode}/planyourvisit/index.htm" target="_blank">Plan your Visit</a><br><br>
             <p>ADD INSTAGRAM IMAGES BELOW using css grid</p>
          </div>`
         $('.park-container').html(parkHtml).show()
@@ -142,23 +158,35 @@ $(document).ready(function() {
     // return to home page
     function returnHome() {
         $('h1').on('click', function() {
-            displayLandingPageElems()
+            displayLandingElemsOnly()
         })
     }
     
     // render the landing page elements
-    function displayLandingPageElems() {
-        $('.wrapper').children().not('.landing-elem').hide()
-        $('.wrapper').children('.landing-elem').show()
+    function displayLandingElemsOnly() {
+        $('.wrapper').children().hide();
+        $('.landing-elem').show()
     }
     
-    function handleAdvancedSearch() {
-        $('.advanced-search').on('click', function() {
-            $('.advanced-search-elem').toggle();
+    function parkBackout() {
+        $('.park-container').on('click', '.park-backout', function() {
+            let searchType = $("input[name='rb']:checked").val()
+            resetParkSearch(searchType);
         })
     }
-
-    // gets NPS data
+    
+    // hides wrapper child elements and shows the park-search-form and search-type-form
+    function resetParkSearch(searchtype) {
+        $('.wrapper').children().hide();
+        $(`.${searchtype}-search-form, .search-type-form`).show();
+        parkSearchSelector.val(-1); 
+        $('.keyword-search-input').val('');
+        $(`.search-type-form input`).prop( "checked", false );
+        $(`.search-type-form input[value=${searchtype}]`).prop( "checked", true );
+    }
+    
+    // general call to get NPS data
+    // STATE_CODE and SEARCH_STRING are optional
     function getNPSData(url, API_KEY, STATE_CODE, SEARCH_STRING, callback) {
         const settings = {
             url: url,
@@ -184,18 +212,4 @@ $(document).ready(function() {
     }
 
     
-     /*   
-    // get current location
-    function getCurrentLocation()
-    {
-        navigator.geolocation.getCurrentPosition(function(location) {
-          console.log(location.coords.latitude);
-          console.log(location.coords.longitude);
-          console.log(location.coords.accuracy);
-        });
-    }  */
-    
-    returnHome()
-    handleAdvancedSearch()
-    displayLandingPageElems()
 })
