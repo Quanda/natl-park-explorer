@@ -50,22 +50,21 @@ $(document).ready(function() {
                 
             // add each national park as a select option
             $.each(matchingNationalParks, function(value, key) {
-                parkSearchSelector.append($("<option></option>").attr("value", value).text(key.fullName));
+                let textHtml = `<option value="${value}">${key.fullName}</option>`
+                parkSearchSelector.append(textHtml);
+                //parkSearchSelector.append($("<option></option>").attr("value", value).text(key.fullName));
             });
             
-            handleKeywordAutoComplete(); // 
+            handleKeywordAutoComplete(); 
         }
     })
 
 /* NATIONAL PARK SERVICE SEARCH */
     /* NAVIGATION LINKS */
-    // find a park
-    $('.find-a-park-link').on('click', function() {
+    
+    // find a park and homepage explore buttons
+    $('.find-a-park-link, .explore-btn-container').on('click', function() {
         resetParkSearch('park')
-    })
-    // inspiration
-    $('.inspiration-link').on('click', function() {
-        console.log('clicked inspiration link');
     })
     // gallery
     $('.gallery-link').on('click', function() {
@@ -95,7 +94,7 @@ $(document).ready(function() {
 
         // render the park view
         renderParkView(matchingNationalPark)
-    })
+    });
     
     // handle search by keyword
     $('.keyword-search-form').on('submit', function(event){
@@ -106,7 +105,7 @@ $(document).ready(function() {
         console.log(`Searching by keyword: ${SEARCH_STRING}`);
 
         getNPSData(NPS_URL, NPS_API_KEY, null, SEARCH_STRING, handleAPIResponse);
-    })
+    });
     
     // handle search by state
     $('.state-search-input').change(function() {
@@ -115,14 +114,14 @@ $(document).ready(function() {
         console.log(`Searching by state code: ${STATE_CODE}`);
 
         getNPSData(NPS_URL, NPS_API_KEY, STATE_CODE, null, handleAPIResponse);
-    })
+    });
     
     // returns array of national park names
     function returnNationalParkNames(parks) {
         // list of national park names
         console.log(parks)
         return parks.map( (park) => park.fullName)
-    }
+    };
     
     // autocomplete the keyword search input
     function handleKeywordAutoComplete() {
@@ -147,7 +146,6 @@ $(document).ready(function() {
             <h2>${park.fullName}</h2>
             <p>${park.description}</p><br>
             <p>Location: <a href="https://www.google.com/maps/place/${park.fullName}" target="_blank">${park.states}</a></p><br>
-            <a href="${park.url}" target="_blank">Website</a>
             <a href="${park.directionsUrl}" target="_blank">Directions</a>
             <a href="https://www.nps.gov/${park.parkCode}/planyourvisit/index.htm" target="_blank">Plan your Visit</a><br><br>
             <p>ADD INSTAGRAM IMAGES BELOW using css grid</p>
