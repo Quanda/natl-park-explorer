@@ -101,7 +101,7 @@ header a {
 /* PARK ELEMENTS */
 .park {
     width: 80%;
-    margin: -65px auto auto auto;
+    margin: auto auto auto auto;
     padding-top: 25px;
 }
 
@@ -112,8 +112,22 @@ header a {
 .park-container {
     background: rgba(235, 232, 245, .8);
     min-height: 650px;
-    margin: 75px 0px 50px 0px;;
+    margin: 25px 0px 50px 0px;;
     outline: 10px solid #ffc593d9;
+}
+
+.park-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.park-container li {
+    margin: .5em 0;
+}
+
+.no-results p {
+    padding-top: 30px;
+    font-size: 35px;
 }
 
 /* INPUT ELEMENTS */
@@ -245,6 +259,24 @@ select {
     z-index: -1;
 }
 
+/* ACCORDION */
+a[class="toggle"] {
+  text-decoration: none;
+  color: inherit;
+}
+
+a[class="toggle"].toggle {
+  width: 100%;
+  display: block;
+  background: rgba(0, 0, 0, 0.78);
+  color: #fefefe;
+  padding: .75em;
+  border-radius: 0.15em;
+  transition: background .3s ease;
+}
+a[class="toggle"]:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
 
 /* RESPONSIVE */
 @media screen and (max-width: 850px) {
