@@ -77,6 +77,10 @@ $(document).ready(function() {
     } */
 
 /* SEARCH FUNCTIONS */
+    // User clicks Interactive Map
+    $('.map-btn-container').on('click', function() {
+        window.location.href = 'mapbox/parkMap.html';
+    })
     
     // User clicks on find-a-park-link or explore-btn-container
     // Reset the search
