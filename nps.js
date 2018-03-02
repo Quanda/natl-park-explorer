@@ -64,6 +64,8 @@ $(document).ready(function() {
             }
         })
     }
+
+
     /*
     function sortNationalParkNames() {
         // sort the national parks alphabetically
@@ -182,6 +184,7 @@ $(document).ready(function() {
         })
         $('.park.inner').removeClass('show').slideUp(350);
         $('.park-container').show();
+        $('.park-list-accordion').show();
     }
    
     // render the landing page elements
@@ -220,7 +223,6 @@ $(document).ready(function() {
     function handleMultiparkSearch(parks) {        
         // clear the sub child elements in park-container and show it
         $('.park-container').children().children().remove();
-        //$('.park-container').show();
         
         // display parks in accordion
         if (parks.length === 1) {
