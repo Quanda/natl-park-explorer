@@ -1,9 +1,8 @@
 // updates nps_parks dataset
 
-$(document).ready(function() {
     
-    const datasets_access_token = 'sk.eyJ1IjoicXVhbmRhIiwiYSI6ImNqZThza2l6NTBzYmYyd216NWJ5YWVtemcifQ.EvqzlhEYn6Ls_A76-pPJoQ';
-    const dataset_id = 'cje8uaat0033i2wnwd8axf1us'
+    const datasets_access_token = 'sk.eyJ1IjoicXVhbmRhIiwiYSI6ImNqZTlqcTk5ODExb3Myd21yb3psNTh3bG4ifQ.eObdl91yAxi4dr6vUmy5pg';
+    const dataset_id = 'cje9czpy60abx33pnaay5u5ya'
     
     let client = new MapboxClient(datasets_access_token);
     
@@ -53,50 +52,39 @@ $(document).ready(function() {
     function updateFeatures(parks) {
         let features = [];
         console.log('running updateFeatures()');
-        console.log(parks)
         // loop through parks, create feature object, add to features array
         for(let i = 0; i < parks.length; i++) {
             const address = `${parks[i].addresses[0].line1}, ${parks[i].addresses[0].city}, ${parks[i].addresses[0].stateCode}`;
             const parkCode = parks[i].parkCode;
             const parkName = parks[i].name
-            const latLong = getLatLong(address) // calls api to get latlong coordinates of the address
-            
+            const lat = Number(parks[i].latLong.split(',')[0].replace('lat:', ""))
+            const long = Number(parks[i].latLong.split(',')[1].replace('long:', ""))
+                  
             // build the feature object
             let feature = {}
                 feature.id = parkCode
                 feature.type = "Feature"
                 feature.properties = { 
-                    "title": parkName 
+                    "title": parkName,
+                    "park code": parkCode
                 }
                 feature.geometry = {
                     "type": "Point",
-                    "coordinates": latLong
+                    "coordinates": [long, lat]
                 }            
             // push feature to features array
             features.push(feature)
         }
-        /*
+        
         // loop through features array and send each feature to api
         features.forEach((feature) => {
             updateFeature(feature);
-        }) */
+        }) 
     }
-    
-    
-    // get the lat-long coordinates from mapbox using the address
-    function getLatLong(address) {
-        client.geocodeForward(address, function(err, res) {
-        }).then(function(val) {
-            console.log(val.entity.features[0].center)
-            // how to return this value to latLong ?
-        });
-    }   
     
    // update a feature in dataset. if the id does not exist, it will create a new one
     function updateFeature(feature) {
-        client.insertFeature(feature, dataset_id, function(err, res) {
+        client.insertFeature(feature, dataset_id, function(err, feature) {
+            console.log(feature)
         });
     }
-    
-    
-})
