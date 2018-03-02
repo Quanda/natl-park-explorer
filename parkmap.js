@@ -11,7 +11,7 @@ $(document).ready(function() {
     mapboxgl.accessToken = public_access_token;
     let map = new mapboxgl.Map({
         container: 'map',
-        style: satelliteStyle
+        style: terrainStyle
     });
     console.log(map)
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
         
        // Handle user leaving map
         $('.leaveMap').click(function() {
-           window.location.href = '../index.html';
+           window.location.href = "index.html";
            $('.wrapper').children().hide();
            $('.landing-elem').show()
         })
@@ -43,13 +43,22 @@ $(document).ready(function() {
             let feature = features[0];
             if(!feature) {return}
             console.log(feature)
-            //console.log(feature)
+            
             let popup = new mapboxgl.Popup({ offset: [0, -15] })
                 .setLngLat(feature.geometry.coordinates)
-                .setHTML('<h3>' + feature.properties.title + '</h3>')
+                .setHTML(feature.properties.title)
                 .setLngLat(feature.geometry.coordinates)
-                .addTo(map);
+                .addTo(map); 
         });
+        
+        $('.popupLink').on('click', function() {
+            // find matching park object 
+            let matchingNationalPark = NPS_DATA.data.find( (park) => park.parkCode == feature["park code"])
+            console.log(matchingNationalPark)
+            // render the park view
+            //renderParkView(matchingNationalPark)
+        })
+        
     
    })
 
