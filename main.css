@@ -299,7 +299,11 @@ a[class="toggle"]:hover {
     }
     input[name="explore-btn"], input[name="map-btn"] {
         background-color: #ffc593d9;
-    }   
+    }
+    
+    .quote-container {
+        display: none;
+    }
 }
 
 
