@@ -80,19 +80,8 @@ header ul a:hover {
 }
 
 .landing-elem {
-    min-width: 350px;
     max-width: 850px;
     margin: auto auto 30px auto;  
-}
-
-.landing-quote {
-    font-size: 22px;
-}
-
-.landing-quote i {
-    font-size: 20px;
-    min-width: 350px;
-    max-width: 850px;
 }
 
 .site-description {
@@ -105,10 +94,17 @@ header ul a:hover {
     width: 80%;
     margin: auto auto auto auto;
     padding-top: 25px;
+    font-size:18px;
 }
 
 .park h2 {
     margin: 10px 0px 20px 0px;
+    background-color: #ffc593d6;
+    width: 450px;
+    margin: 15px auto 30px auto;
+    padding: 15px 0px 15px 0px;
+    border-radius: 5px;
+    font-size: 26px
 }
 
 .park-container {
@@ -307,12 +303,20 @@ a[class="toggle"]:hover {
         display: none;
     }
     input[name="explore-btn"], input[name="map-btn"] {
-        background-color: #fffec6f0;
     }
     
-    .landing-quote {
+    .intro-container {
         /* display: none; */
         font-size: 16px;
+    }
+    
+    .search-type-form {
+        width: 380px;
+        margin: auto
+    }
+    
+    .park h2 {
+        width: auto;
     }
 }
 
