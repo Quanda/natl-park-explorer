@@ -41,7 +41,8 @@ $(document).ready(function() {
                 api_key: NPS_API_KEY,
                 limit: paginationSize,
                 start: startPoint,
-                q: 'park'
+                q: 'park',
+                fields: 'images'
             },
             success: function(nps_response) {
                 // build data array NPS_DATA.data by filtering response only by national parks
@@ -152,6 +153,10 @@ $(document).ready(function() {
     
     // render the view for a single park
     function renderParkView(park) {
+        let imageResults = ``
+        park.images.forEach( (img) => {
+            imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
+        })
         let parkHtml = `<div class="park">
             <a class="park-backout" href="#">Back</a>
             <h2>${park.fullName}</h2>
@@ -159,7 +164,9 @@ $(document).ready(function() {
             <p>Location: <a href="https://www.google.com/maps/place/${park.fullName}" target="_blank">${park.states}</a></p><br>
             <a href="${park.directionsUrl}" target="_blank">Directions</a>
             <a href="https://www.nps.gov/${park.parkCode}/planyourvisit/index.htm" target="_blank">Plan your Visit</a><br><br>
-            <p>ADD INSTAGRAM IMAGES BELOW using css grid</p>
+            <div class="grid">
+                ${imageResults}
+            </div>
          </div>`
         $('.park-container').find('.park').remove();
         $('.park-list-accordion').hide().children().remove();
@@ -167,10 +174,13 @@ $(document).ready(function() {
     }
 
     // render the view for potentially multiple parks
-    function renderParksAccordion(nationalparks) {                
+    function renderParksAccordion(nationalparks) {    
         // loop through national parks and append each to park-list-accordion
         nationalparks.forEach( (park) => {
-            console.log(park);
+            let imageResults = ``
+            park.images.forEach( (img) => {
+                imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
+            })
             let parkListItem = `
                 <li>
                     <a class="toggle" href="javascript:void(0);">${park.fullName}</a>
@@ -181,8 +191,10 @@ $(document).ready(function() {
                         <p>Location: <a href="https://www.google.com/maps/place/${park.fullName}" target="_blank">${park.states}</a></p><br>
                         <a href="${park.directionsUrl}" target="_blank">Directions</a>
                         <a href="https://www.nps.gov/${park.parkCode}/planyourvisit/index.htm" target="_blank">Plan your Visit</a><br><br>
-                        <p>ADD INSTAGRAM IMAGES BELOW using css grid</p>
-                     </div>
+                        <div class="grid">
+                            ${imageResults}
+                        </div>
+                    </div>
                 </li>`
             $('.park-list-accordion').append(parkListItem);
         })
