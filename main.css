@@ -35,13 +35,6 @@ h1 {
     margin: 15px 0px 0px 20px;
     font-size: 35px;
     cursor: pointer;
-
-
-}
-
-.h1-background {
-
-
 }
 
 header ul {
@@ -67,14 +60,17 @@ header a {
 }
 
 .quote-container {
-    background-color: #ffffff8a;
+    background-color: #bda5a529;
     border-radius: 5px;
-    padding: 20px 20px 5px 20px;
+    padding: 25px 25px 15px 25px;
+    border: 1px solid black
     
 }
-
-.landing-quote {
-    font-size: 28px;
+.intro-container {
+    background-color: #bda5a529;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 25px 25px 15px 25px;
 }
 
 .landing-elem {
@@ -83,8 +79,12 @@ header a {
     margin: auto auto 30px auto;  
 }
 
-.landing-quote i {
+.landing-quote {
     font-size: 22px;
+}
+
+.landing-quote i {
+    font-size: 20px;
     min-width: 350px;
     max-width: 850px;
 }
@@ -168,8 +168,8 @@ input[type="radio"]:checked + .radio-label::before {
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px;
-  padding-left: 30px;
-  padding-right: 10px;
+  padding-left: 35px;
+  padding-right: 20px;
   line-height: 40px;
   cursor: pointer;
 }
@@ -211,6 +211,10 @@ input[type="radio"]:checked + .radio-label::before {
     margin-top: 35px;
 }
 
+.search-type-form h4 {
+    margin-bottom: 15px;
+}
+
 .input-label {
     background-color: transparent;
     position: relative;
@@ -226,8 +230,7 @@ input[type="radio"]:checked + .radio-label::before {
     color: white;
 }
 .input-label:hover {
-        box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.5) inset
-
+    box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.5) inset
 }
 select {
     min-width: 250px;
@@ -283,9 +286,7 @@ a[class="toggle"]:hover {
 
 /* RESPONSIVE */
 @media screen and (max-width: 850px) {
-    header {
-        height: 120px;
-    }
+   
     h1 {
         float: none;
     }
@@ -294,11 +295,12 @@ a[class="toggle"]:hover {
         display: none;
     }
     input[name="explore-btn"], input[name="map-btn"] {
-        background-color: #ffc593d9;
+        background-color: #fffec6f0;
     }
     
-    .quote-container {
-        display: none;
+    .landing-quote {
+        /* display: none; */
+        font-size: 16px;
     }
 }
 

@@ -6,6 +6,7 @@ $(document).ready(function() {
     const terrainStyle = 'mapbox://styles/quanda/cje9hvv40b6sh2rmpzbloqwvx'
     const satelliteStyle = 'mapbox://styles/quanda/cje9ihwcj5xch2so2963460t0'
     const darkStyle = 'mapbox://styles/quanda/cjea3n8mi0ty02srwqufe3fcc'
+    const basicStyle = 'mapbox://styles/quanda/cjeat05qc2x2g2rpjh0np3gto'
     
     // initialize map
     mapboxgl.accessToken = public_access_token;
@@ -40,18 +41,20 @@ $(document).ready(function() {
                 layers: ['nps-parks-tileset'] // replace this with the name of the layer
             }); 
             
+            if(!features.length) {return}
+
             let feature = features[0];
-            if(!feature) {return}
             console.log(feature)
             
             let popup = new mapboxgl.Popup({ offset: [0, -15] })
                 .setLngLat(feature.geometry.coordinates)
-                .setHTML(feature.properties.title)
+                .setHTML(`<p class="parkPopup"> ${feature.properties.title} </p>`)
                 .setLngLat(feature.geometry.coordinates)
-                .addTo(map); 
+                .addTo(map);
         });
         
-        $('.popupLink').on('click', function() {
+       
+        map.on('click', 'parkPopup', function() {
             // find matching park object 
             let matchingNationalPark = NPS_DATA.data.find( (park) => park.parkCode == feature["park code"])
             console.log(matchingNationalPark)
