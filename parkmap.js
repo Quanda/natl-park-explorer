@@ -17,6 +17,9 @@ $(document).ready(function() {
     console.log(map)
 
     map.on('load', function () {
+        // show Go Back
+        $('.leaveMap').css('display', 'inline-block');
+        
         // Add zoom controls
         map.addControl(new mapboxgl.NavigationControl());
 
