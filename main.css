@@ -22,10 +22,8 @@ html {
 
 /* HEADER ELEMENTS */
 header {
-    position: relative;
-    top: 0;
     width: 100%;
-    height: 80px;
+    height: 100px;
     background-color: transparent;
     border-bottom: 8px solid #2b2929;
 }
@@ -40,10 +38,8 @@ h1 {
 header ul {
     list-style-type: none;
     float: right;
-    margin: 25px 20px 0px 0px;
-
+    margin: 20px 20px 0px 0px;
 }
-
 header li {
     display: inline;
     margin: 0px 10px 0px 10px;
@@ -51,9 +47,12 @@ header li {
 
 header a {
     text-decoration: none;
+    color: white;
+    font-size: 18px;
+    margin: 30px 0px 0px 0px;
 }
 header ul a:hover {
-    color: white;
+    color: black;
 }
 
 /* WRAPPER */
@@ -140,14 +139,14 @@ input[name="explore-btn"], input[name="map-btn"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-color: transparent;
+    background-color: darkolivegreen;
     font-size: 22px;
+    color: white;
+    border: none;
 }
 input[name="explore-btn"]:hover, input[name="map-btn"]:hover {
     box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.5) inset;
-    color: white;
 }
-
 
 input[type="radio"] {
   position: absolute;
@@ -224,18 +223,16 @@ input[type="radio"]:checked + .radio-label::before {
 }
 
 .input-label {
-    background-color: transparent;
     position: relative;
     display: block;
     max-width: 400px;
     min-width: 250px;
     min-height: 58px;
     margin: 0 auto 20px auto;
-    z-index: 10;
-    border: 2px solid black;
     text-align-last: center;
     outline: none;
     color: white;
+    border: 2px solid black;
 }
 .input-label:hover {
     box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.5) inset
@@ -290,6 +287,11 @@ a[class="toggle"].toggle {
 }
 a[class="toggle"]:hover {
   background: rgba(0, 0, 0, 0.9);
+}
+
+/* FANCY BOX */
+.fancybox-button {
+    background-color: white;
 }
 
 /* RESPONSIVE */

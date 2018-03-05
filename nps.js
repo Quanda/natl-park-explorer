@@ -135,10 +135,13 @@ $(document).ready(function() {
         let matchedParks = [];
         NPS_DATA.data.forEach( (park) => {
             Object.keys(park).some( function(key) {
-                if(park[key].match(SEARCH_STRING)) {
-                    matchedParks.push(park);
-                    return true;
+                if(typeof park[key] !== 'object') {
+                   if(park[key].match(SEARCH_STRING)) {
+                        matchedParks.push(park);
+                        return true;
+                    } 
                 }
+
             })
         })
         // render the view
