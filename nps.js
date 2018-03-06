@@ -1,5 +1,8 @@
 /*
-    compartmentalize JS into appropriate files
+    tab into search types
+    nps images, if ajax returns 404, do not render img
+    park search returning duplicates
+    clean up js
 */
 
 $(document).ready(function() {
@@ -79,13 +82,13 @@ $(document).ready(function() {
 
 /* SEARCH FUNCTIONS */
     // User clicks Interactive Map
-    $('.map-btn-container').on('click', function() {
+    $('#map').on('click', function() {
         window.location.href = 'parkmap.html';
     })
     
     // User clicks on find-a-park-link or explore-btn-container
     // Reset the search
-    $('.find-a-park-link, .explore-btn-container').on('click', function() {
+    $('.find-a-park-link, #explore').on('click', function() {
         resetParkSearch('park')
     })
     
@@ -230,6 +233,7 @@ $(document).ready(function() {
     // hides wrapper child elements and shows the park-search-form and search-type-form
     function resetParkSearch(searchtype) {
         $('.wrapper').children().hide(); // hide wrapper children
+        $('footer').hide();
         $(`.${searchtype}-search-form, .search-type-form`).show(); //show the selected search type input
         parkSearchSelector.val(-1); // reset selected park in park search input
         $('.keyword-search-input').val(''); // clear the keyword search input value
