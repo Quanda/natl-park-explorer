@@ -1,5 +1,4 @@
 /*
-    tab into search types
     nps images, if ajax returns 404, do not render img
     park search returning duplicates
     clean up js
@@ -18,16 +17,21 @@ $(document).ready(function() {
     // used in fetchParks() 
     const paginationSize = 50;
 
+     // create NPS variables
+    let NPS_DATA = {data: []}, matchingNationalParks, matchingNationalParkNames;
+    
     // invoke functions
     displayLandingElemsOnly(); // initially render only home page elements
     returnHome() // removes wrapper child elements when home button (h1) clicked
     parkBackout(); // handles click of 'Back' button in Park view
     handleAccordionToggle(); 
-    fetchParks();
+    fetchParks(); 
     
-    // initialize variables
-    let NPS_DATA = {data: []}, matchingNationalParks, matchingNationalParkNames;
-    
+    // initialie SELECT2 inputs
+    $('.js-example-basic-single').select2({
+        width: '80%',
+    });
+
     // prepare the dropdown input
     let parkSearchSelector = $('.park-search-input');
     parkSearchSelector.empty(); // remove old options
@@ -53,7 +57,7 @@ $(document).ready(function() {
                 NPS_DATA.data = NPS_DATA.data.concat(newParks);
 
                 // add each national park as a select option
-                $.each(NPS_DATA.data, function(value, key) {
+                $.each(newParks, function(value, key) {
                     let textHtml = `<option value="${key.parkCode}">${key.fullName}</option>`
                     parkSearchSelector.append(textHtml);    
                 });
@@ -128,7 +132,6 @@ $(document).ready(function() {
         handleMultiparkSearch(parksInState);
     });
     
-    // FIX THIS TO WORK WITH NPS_DATA
     // handle search by keyword
     $('.keyword-search-form').on('submit', function(event){
         event.preventDefault();
@@ -161,7 +164,17 @@ $(document).ready(function() {
     function renderParkView(park) {
         let imageResults = ``
         park.images.forEach( (img) => {
-            imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
+            console.log(img.url)
+            // check if image exists
+            $.ajax({
+                url: img.url
+            }).done(function(data, textStatus, xhr) {
+                console.log(xhr.status);
+                if (xhr.status === 200) {
+                    imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
+                }
+            });
+            //imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
         })
         let parkHtml = `<div class="park">
             <a class="park-backout" href="#">Back</a>

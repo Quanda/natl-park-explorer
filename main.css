@@ -62,8 +62,6 @@ header ul a:hover {
 }
 
 .intro-container {
-    background-color: #bda5a529;
-    border: 1px solid black;
     padding: 25px 25px 15px 25px;
     max-width: 850px;
     margin: auto auto 30px auto;  
@@ -71,9 +69,6 @@ header ul a:hover {
 
 .intro-container a:hover {
     color:white;
-}
-
-.landing-elem {
 }
 
 .site-description {
@@ -85,7 +80,6 @@ header ul a:hover {
 .park {
     width: 80%;
     margin: auto auto auto auto;
-    padding-top: 25px;
     font-size:18px;
 }
 
@@ -97,6 +91,10 @@ header ul a:hover {
     padding: 15px 0px 15px 0px;
     border-radius: 5px;
     font-size: 26px
+}
+
+.park-backout {
+    padding-top: 15px;
 }
 
 .park-container {
@@ -120,21 +118,20 @@ header ul a:hover {
 }
 
 .no-results p {
-    padding-top: 30px;
+    padding: 30px 0px 30px 0px;
     font-size: 35px;
 }
 
 /* INPUT ELEMENTS */
 input[name="explore-btn"], input[name="map-btn"] {
-    width: 100%;
+    width: 60%;
+    max-width: 500px;
     height: 55px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     background-color: darkolivegreen;
     font-size: 22px;
     color: white;
-    border: none;
+    border: 2px solid black;
+    margin: 5px 0px 5px 0px;
 }
 input[name="explore-btn"]:hover, input[name="map-btn"]:hover {
     box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.5) inset;
@@ -195,12 +192,14 @@ input[type="radio"]:checked + .radio-label::before {
 
 .keyword-search-input {
     background-color: transparent;
-    -webkit-appearance: none;
-    border: none;
     display: block;
-    width: 100%;
-    padding: 12px 15px 15px 15px;
-    font-size: 22px;
+    width: 80%;
+    font-size: 20px;
+    border: 2px solid black;
+    margin: auto;
+    text-align: center;
+    height: 45px;
+    
 }
 .keyword-search-input::placeholder {
     color:black;
@@ -211,55 +210,21 @@ input[type="radio"]:checked + .radio-label::before {
 }
 
 .search-type-form h4 {
-    margin-bottom: 15px;
+    margin: 35px 0px 5px 0px;
 }
 
-.input-label {
-    position: relative;
-    display: block;
-    max-width: 400px;
-    min-width: 250px;
-    min-height: 58px;
-    margin: 0 auto 20px auto;
-    text-align-last: center;
-    outline: none;
-    color: white;
+/* SELECT2 */
+.select2-container--default .select2-selection--single {
     border: 2px solid black;
-}
-.input-label:hover {
-    box-shadow: 0px 0px 0px 2px rgba(0,0,0,0.5) inset
-}
-select {
-    min-width: 250px;
-    text-align-last: center;
-    outline: none;
-    background: transparent;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0;
-    margin: 0;
-    display: block;
-    width: 100%;
-    padding: 12px 55px 15px 15px;
-    font-size: 22px;
-    color: black;
-    cursor: pointer;
+    background-color: transparent;
+    height: 45px;
+    font-size: 20px;
+    line-height: 45px;
 }
 
-.select-label::after {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50px;
-    height: 100%;
-    line-height: 50px;
-    content: '\2228';
-    text-align: center;
+.select2-container--default .select2-selection--single .select2-selection__rendered { 
+    line-height: 45px;
     color: black;
-    font-size: 24px;
-    border-left: 1px solid black;
-    z-index: -1;
 }
 
 /* ACCORDION */
