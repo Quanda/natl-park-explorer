@@ -8,65 +8,85 @@ $(document).ready(function() {
     const darkStyle = 'mapbox://styles/quanda/cjea3n8mi0ty02srwqufe3fcc'
     const basicStyle = 'mapbox://styles/quanda/cjeat05qc2x2g2rpjh0np3gto'
     
-    // initialize map
-    mapboxgl.accessToken = public_access_token;
-    let map = new mapboxgl.Map({
-        container: 'map',
-        style: terrainStyle
-    });
-    console.log(map)
-
-    map.on('load', function () {
-        // show Go Back
-        $('.leaveMap').css('display', 'inline-block');
-        
-        // Add zoom controls
-        map.addControl(new mapboxgl.NavigationControl());
-
-        // Geolocate user
-        map.addControl(new mapboxgl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            trackUserLocation: true
-        }));
-        
-       // Handle user leaving map
-        $('.leaveMap').click(function() {
-           window.location.href = "index.html";
-           $('.wrapper').children().hide();
-           $('.landing-elem').show()
-        })
-        
-        // handle user click on map
-        map.on('click', function(e) {
-            let features = map.queryRenderedFeatures(e.point, {
-                layers: ['nps-parks-tileset'] // replace this with the name of the layer
-            }); 
-            
-            if(!features.length) {return}
-
-            let feature = features[0];
-            console.log(feature)
-            
-            let popup = new mapboxgl.Popup({ offset: [0, -15] })
-                .setLngLat(feature.geometry.coordinates)
-                .setHTML(`<p class="parkPopup"> ${feature.properties.title} </p>`)
-                .setLngLat(feature.geometry.coordinates)
-                .addTo(map);
+    function leaveMap() {
+        window.location.href = "index.html";
+        $('.wrapper').children().hide();
+        $('.landing-elem').show()
+    }
+    
+    // CHECK if client has webGL installed
+    if(!Detector.webgl) {
+        $('.homeBtn').show().css('display', 'block');
+        let errHtml = Detector.getWebGLErrorMessage();
+        $('body').append(errHtml);
+        $('#webgl-error-message').css({
+            'font-size': '35px',
+            'margin-top': '2em'
         });
         
-       
-        map.on('click', 'parkPopup', function() {
-            // find matching park object 
-            let matchingNationalPark = NPS_DATA.data.find( (park) => park.parkCode == feature["park code"])
-            console.log(matchingNationalPark)
-            // render the park view
-            //renderParkView(matchingNationalPark)
+        $('.homeBtn').on('click', function() {
+            leaveMap()
         })
+    } else {
         
-    
-   })
+        // initialize map
+        mapboxgl.accessToken = public_access_token;
+        let map = new mapboxgl.Map({
+            container: 'map',
+            style: terrainStyle
+        });
+        console.log(map)
 
+        map.on('load', function () {
+            // show Go Back
+            $('.leaveMap').css('display', 'inline-block');
+
+            // Add zoom controls
+            map.addControl(new mapboxgl.NavigationControl());
+
+            // Geolocate user
+            map.addControl(new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            }));
+
+           // Handle user leaving map
+            $('.leaveMap').click(function() {
+               leaveMap();
+            })
+
+            // handle user click on map
+            map.on('click', function(e) {
+                let features = map.queryRenderedFeatures(e.point, {
+                    layers: ['nps-parks-tileset'] // replace this with the name of the layer
+                }); 
+
+                if(!features.length) {return}
+
+                let feature = features[0];
+                console.log(feature)
+
+                let popup = new mapboxgl.Popup({ offset: [0, -15] })
+                    .setLngLat(feature.geometry.coordinates)
+                    .setHTML(`<p class="parkPopup"> ${feature.properties.title} </p>`)
+                    .setLngLat(feature.geometry.coordinates)
+                    .addTo(map);
+            });
+
+
+            map.on('click', 'parkPopup', function() {
+                // find matching park object 
+                let matchingNationalPark = NPS_DATA.data.find( (park) => park.parkCode == feature["park code"])
+                console.log(matchingNationalPark)
+                // render the park view
+                //renderParkView(matchingNationalPark)
+            })
+
+
+       })
+
+   }
 })
 

@@ -26,7 +26,7 @@ $(document).ready(function() {
     $('.js-example-basic-single').select2({
         width: '80%',
     });
-
+    
     // prepare the dropdown input
     let parkSearchSelector = $('.park-search-input');
     parkSearchSelector.empty(); // remove old options
