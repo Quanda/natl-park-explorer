@@ -1,12 +1,21 @@
 # National Park Explorer
 Thinkful API-Hack project. Find information on America's National Parks.
 
+## Build with
+HTML, CSS, JQuery
+
 ## APIs used
 Mapbox
 https://www.mapbox.com/developers/
 
 National Park Service
 https://www.nps.gov/subjects/digital/nps-data-api.htm
+
+## Features
+Park Search, State Search, Keyword Search, Interactive Map
+
+## DEMO
+https://quanda.github.io/natl-park-explorer/
 
 ## Screenshots
 
