@@ -6,6 +6,10 @@ Thinkful API-Hack capstone project. Allows users to find information on America'
 ## Build with
 HTML, CSS, Javascript, JQuery
 
+## Libraries used
+https://select2.org/
+http://fancyapps.com/fancybox/3/
+
 ## APIs used
 Mapbox
 https://www.mapbox.com/developers/
