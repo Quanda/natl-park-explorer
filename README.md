@@ -7,24 +7,21 @@ Thinkful API-Hack capstone project. Allows users to find information on America'
 HTML, CSS, Javascript, JQuery
 
 ## Libraries used
-https://select2.org/
-http://fancyapps.com/fancybox/3/
+[Select2](https://select2.org/) <br>
+[Fancybox](https://fancyapps.com/fancybox/3/)
 
 ## APIs used
-Mapbox
-https://www.mapbox.com/developers/
+[Mapbox](https://www.mapbox.com/developers/) <br>
+[National Park Service](https://www.nps.gov/subjects/digital/nps-data-api.htm)
 
-National Park Service
-https://www.nps.gov/subjects/digital/nps-data-api.htm
 
 ## Features
 Park Search, State Search, Keyword Search, Interactive Map
 
 ## DEMO
-https://quanda.github.io/natl-park-explorer/
+[LIVE DEMO](https://quanda.github.io/natl-park-explorer/)
 
 ## Screenshots
-
 ### Landing Page
 [![Screen_Shot_2018-03-07_at_9.18.46_PM.png](https://s10.postimg.org/6bou1hk7t/Screen_Shot_2018-03-07_at_9.18.46_PM.png)](https://postimg.org/image/td5f78jv9/)
 
