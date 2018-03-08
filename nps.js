@@ -1,14 +1,9 @@
-/*
-    nps images, if ajax returns 404, do not render img
-    park search returning duplicates
-    clean up js
+/* todo
+    nps images, if ajax returns 404, do not render img. [need to resolve CORS ISSUE]
 */
 
 $(document).ready(function() {
     'use strict';
-    
-    // Google Maps API
-    const PLACE_DETAILS_URL = 'https://maps.googleapis.com/maps/api/place/nearbysearch';
     
     // National Parks Service API (https://www.nps.gov/subjects/developer/api-documentation.htm#/places/getPlaces)
     const NPS_URL = 'https://developer.nps.gov/api/v1/parks';
@@ -24,10 +19,10 @@ $(document).ready(function() {
     displayLandingElemsOnly(); // initially render only home page elements
     returnHome() // removes wrapper child elements when home button (h1) clicked
     parkBackout(); // handles click of 'Back' button in Park view
-    handleAccordionToggle(); 
-    fetchParks(); 
+    handleAccordionToggle(); // initializes the accordion toggle functionality
+    fetchParks(); // grabs the data from the NPS API
     
-    // initialie SELECT2 inputs
+    // initialize SELECT2 inputs - https://select2.org/
     $('.js-example-basic-single').select2({
         width: '80%',
     });
@@ -37,10 +32,9 @@ $(document).ready(function() {
     parkSearchSelector.empty(); // remove old options
     parkSearchSelector.append($("<option></option>").text('Find a Park').val(-1));
     
-    function fetchParks(startPoint = 0) {
-        // MAKE AJAX CALL TO LOAD NATIONAL PARK DATA
-        // INITIALIZE THE KEYWORD SEARCH AUTOCOMPLETE WITH THIS DATA
-        
+    // MAKE AJAX CALL TO LOAD NATIONAL PARK DATA
+    // When done, will append parks to park search select
+    function fetchParks(startPoint = 0) {        
         $.ajax( {
             url: NPS_URL,
             dataType: 'json', 
@@ -73,17 +67,6 @@ $(document).ready(function() {
         })
     }
 
-
-    /*
-    function sortNationalParkNames() {
-        // sort the national parks alphabetically
-        return matchingNationalParks.sort(function(a, b){
-            if(a.fullName < b.fullName) return -1;
-            if(a.fullName > b.fullName) return 1;
-            return 0;
-        }) 
-    } */
-
 /* SEARCH FUNCTIONS */
     // User clicks Interactive Map
     $('#map').on('click', function() {
@@ -96,7 +79,7 @@ $(document).ready(function() {
         resetParkSearch('park')
     })
     
-    // handle user selecting search type
+    // handle user selecting a search type
     $('.search-type-form input').change(function(event) {
         let searchType = $(event.target).val();
         let selectedSearchForm = $(`.${searchType}-search-form`);
@@ -106,7 +89,9 @@ $(document).ready(function() {
         $(`.search-type-form input[value=${searchType}]`).prop( "checked", true );
 
         $('.search-form').not(selectedSearchForm).hide();
-        $(selectedSearchForm).show()   
+        $(selectedSearchForm).show()  
+        
+        resetParkSearch(searchType)
     });
     
     // handle user selecting park from find a park dropdown
@@ -260,6 +245,7 @@ $(document).ready(function() {
         }
     }
     
+    // renders the view if no park results were found
     function noResultsFound() {
         // empty the children of park-container
         $('.park-container').show().children().html('');
@@ -267,6 +253,7 @@ $(document).ready(function() {
         $('.no-results').show().html(`<p>No results found</p>`).effect( "shake" );
     }
     
+    // performs accordion toggle functionality
     function handleAccordionToggle() {
         $('.park-list-accordion').on('click', '.toggle', function(event) {
             console.log('clicked toggle');
@@ -285,8 +272,19 @@ $(document).ready(function() {
         })
     }
     
+    // returns a string that has first letter capitalized 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+    
+    /* unused sorting function. keeping for potential future iterations. 
+    function sortNationalParkNames() {
+        // sort the national parks alphabetically
+        return matchingNationalParks.sort(function(a, b){
+            if(a.fullName < b.fullName) return -1;
+            if(a.fullName > b.fullName) return 1;
+            return 0;
+        }) 
+    } */
         
 })

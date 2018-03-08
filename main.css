@@ -57,11 +57,6 @@ header ul a:hover {
     color: black;
 }
 
-/* WRAPPER */
-.wrapper {
-
-}
-
 .intro-container {
     padding: 25px 25px 15px 25px;
     max-width: 850px;
@@ -271,8 +266,6 @@ footer a {
 
 /* RESPONSIVE */
 @media screen and (max-width: 850px) {
-    body {
-    }
     h1 {
         float: none;
     }
@@ -285,7 +278,6 @@ footer a {
     }
     
     .intro-container {
-        /* display: none; */
         font-size: 16px;
     }
     
