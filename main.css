@@ -66,6 +66,7 @@ header ul a:hover {
     padding: 25px 25px 15px 25px;
     max-width: 850px;
     margin: auto auto 30px auto;  
+    font-size: 22px;
 }
 
 .intro-container a:hover {
@@ -124,6 +125,9 @@ header ul a:hover {
 }
 
 /* INPUT ELEMENTS */
+input {
+    border-radius: 5px;
+}
 input[name="explore-btn"], input[name="map-btn"] {
     width: 60%;
     max-width: 500px;
@@ -147,10 +151,6 @@ input[type="radio"] {
 input[type="radio"]:checked + radio-label {
   padding-left: 10px;
   color: #fff;
-}
-
-input[type="radio"] + .radio-label::before {
-  border-radius: 18px;
 }
 
 input[type="radio"]:checked + .radio-label::before {
