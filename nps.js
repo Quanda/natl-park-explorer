@@ -136,7 +136,7 @@ $(document).ready(function() {
     $('.keyword-search-form').on('submit', function(event){
         event.preventDefault();
 
-        const SEARCH_STRING = $('.keyword-search-input').val();
+        let SEARCH_STRING = capitalizeFirstLetter($('.keyword-search-input').val());
        
         let matchedParks = [];
         NPS_DATA.data.forEach( (park) => {
@@ -164,17 +164,7 @@ $(document).ready(function() {
     function renderParkView(park) {
         let imageResults = ``
         park.images.forEach( (img) => {
-            console.log(img.url)
-            // check if image exists
-            $.ajax({
-                url: img.url
-            }).done(function(data, textStatus, xhr) {
-                console.log(xhr.status);
-                if (xhr.status === 200) {
-                    imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
-                }
-            });
-            //imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
+            imageResults += `<div class="result"><a href="${img.url}" data-fancybox><img src="${img.url}" alt="${img.altText}"/></a></div>`
         })
         let parkHtml = `<div class="park">
             <a class="park-backout" href="#">Back</a>
@@ -293,6 +283,10 @@ $(document).ready(function() {
                 $this.next().slideToggle(350);
             }  
         })
+    }
+    
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
         
 })

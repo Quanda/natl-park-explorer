@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Julius Sans One';
+    font-family: 'Open Sans', sans-serif;
     color: #2b2929;
 }
 
@@ -237,7 +237,7 @@ a[class="toggle"] {
 a[class="toggle"].toggle {
   width: 100%;
   display: block;
-  background: rgba(0, 0, 0, 0.78);
+  background: darkolivegreen;
   color: #fefefe;
   padding: .75em;
   border-radius: 0.15em;
@@ -253,6 +253,7 @@ footer {
     bottom: 0px;
     background-color: black;
     width: 100%;
+    padding: 4px 0px 4px 0px;
 }
 
 footer p {
