@@ -18,7 +18,7 @@ $(document).ready(function() {
     if(!Detector.webgl) {
         $('.homeBtn').show().css('display', 'block');
         let errHtml = Detector.getWebGLErrorMessage();
-        $('body').append(errHtml);
+        $('.homeBtn').after(errHtml);
         $('#webgl-error-message').css({
             'font-size': '35px',
             'margin-top': '2em'
