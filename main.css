@@ -98,7 +98,7 @@ header ul a:hover {
 .park-container {
     background: rgba(235, 232, 245, .8);
     margin: 25px 0px 50px 0px;
-    outline: 10px solid #ffc593d9;
+    border: 10px solid #ffc593d9;
 }
 
 .park-container ul {
@@ -107,7 +107,7 @@ header ul a:hover {
 }
 
 .park-container li {
-    margin: .5em 0;
+    margin: .2em 0;
 }
 
 .result img {
@@ -202,6 +202,9 @@ input[type="radio"]:checked + .radio-label::before {
     color:black;
 }
 
+.search-form {
+    margin-top: 20px;
+}
 .search-type-form {
     margin-top: 35px;
 }
@@ -288,7 +291,6 @@ footer a {
     }
     
     .search-type-form {
-        width: 380px;
         margin: auto
     }
     
@@ -298,6 +300,11 @@ footer a {
     
     footer {
         position: fixed
+    }
+    
+    .radio-label {
+        padding-left: 30px;
+        padding-right: 5px
     }
 }
 
