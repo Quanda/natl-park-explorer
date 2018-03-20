@@ -1,4 +1,8 @@
-// render a parkmap of all national parks
+/* 
+    link to google maps onclick of popup
+    make popup name fullname
+*/
+
 
 $(document).ready(function() {
 

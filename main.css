@@ -27,25 +27,23 @@ header {
     width: 100%;
     height: 100px;
     background-color: transparent;
-    border-bottom: 8px solid black;
+    border-bottom: 5px solid black;
     margin-bottom: 25px;
+    text-align: center;
 }
 
 h1 {
-    float:left;
-    margin: 15px 0px 0px 20px;
+    margin: 15px 0px 15px 0px;
     font-size: 35px;
     cursor: pointer;
 }
 
 header ul {
     list-style-type: none;
-    float: right;
-    margin: 50px 10px 0px 0px;
 }
 header li {
     display: inline;
-    margin: 0px 10px 0px 10px;
+    margin: 0px 20px 0px 20px;
 }
 
 header a {
@@ -123,6 +121,7 @@ header ul a:hover {
 /* INPUT ELEMENTS */
 input {
     border-radius: 5px;
+    cursor: pointer;
 }
 input[name="explore-btn"], input[name="map-btn"] {
     width: 60%;

@@ -21,31 +21,22 @@
 <body>
 
     <header role="banner"> 
-        <div class="h1-background">
-            <h1>National Parks Explorer</h1>
-        </div>
+        <h1>National Parks Explorer</h1>
         <ul>
-            <li><a href="#" class="find-a-park-link">EXPLORE PARKS</a></li>
-            <li><a href="parkmap.html" class="find-a-park-link">INTERACTIVE MAP</a></li>
+            <li><a href="#" class="find-a-park-link">EXPLORE</a></li>
+            <li><a href="parkmap.html" class="find-a-park-link">MAP</a></li>
         </ul>
     </header>
 
     <main role="main" class="wrapper">
         
-        <!-- SEARCH ALL -->
+        <!-- PARK SEARCH -->
         <form class="search-form park-search-form">
             <label for="park-search-input" class="input-label select-label">
                 <select class="park-search-input js-example-basic-single" tabindex="1"></select>
             </label>
         </form>
 
-        <!-- KEYWORD SEARCH -->
-        <form class="search-form keyword-search-form">
-            <label for="keyword-search-input" class="input-label">
-                <input type="text" class="keyword-search-input" placeholder="Search by Keyword">
-            </label>
-        </form>
-        
         <!-- STATE SEARCH -->
         <form class="search-form state-search-form">
             <label for="state-search-input" class="input-label select-label">
@@ -106,6 +97,13 @@
             </label>
         </form>
         
+        <!-- KEYWORD SEARCH -->
+        <form class="search-form keyword-search-form">
+            <label for="keyword-search-input" class="input-label">
+                <input type="text" class="keyword-search-input" placeholder="Search by Keyword">
+            </label>
+        </form>
+        
         <!-- SEARCH TYPE -->
         <form class="search-type-form">
             <h4>Search Type</h4>
@@ -116,12 +114,6 @@
             <input type="radio" name="rb" id="rb3" value="keyword"/>
             <label for="rb3" class="radio-label">Keyword</label>
         </form>
-        
-        <!-- 
-        <section class="landing-elem site-description">
-            <p>Find information on the National Park System and view top Instagram photos</p>
-        </section>  
-        -->
         
         <div class="intro-container landing-elem">
             <h2 class="landing-elem">Find information about Americas National Parks.</h2>
