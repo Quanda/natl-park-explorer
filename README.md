@@ -1,7 +1,7 @@
 # National Park Explorer
 
 ## Summary
-Thinkful API-Hack capstone project. Allows users to find information on America's National Parks with multiple search options.
+Allows users to find information on America's National Parks with multiple search options. Leverages the National Park System API.
 
 ## Build with
 HTML, CSS, Javascript, JQuery
